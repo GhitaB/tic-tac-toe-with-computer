@@ -157,6 +157,10 @@ function clearGame() {
   // Clear the latest game
   window.game = [];
   window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  for (var position = 1; position <= 9; position++) {
+    var box = document.querySelector('.box.x' + position + '');
+    box.textContent = "";
+   }
 }
 
 function trainComputer(numberOfGames) {
@@ -166,7 +170,9 @@ function trainComputer(numberOfGames) {
   for (var i = 0; i < numberOfGames; i++) {
     console.log("New game... The winner is:");
     simulateGame();
-    clearGame();
+    if (i < numberOfGames - 1) {
+      clearGame();
+    }
   }
 }
 
