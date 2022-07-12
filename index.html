@@ -37,7 +37,7 @@ function drawMove() {
   var player = move % 2 + 1;
   var text = "X";
   if (player === 2) {
-    text = "0";
+    text = "O";
   }
   var box = document.querySelector('.box.x' + move + '');
   box.textContent = text;
@@ -96,6 +96,9 @@ body {
   height: 180px;
   float: left;
   border: 10px solid #111;
+  font-size: 150px;
+  color: white;
+  text-align: center;
 }
 
 .console {
