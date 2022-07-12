@@ -38,8 +38,9 @@ function isGameOver() {
   // 0 1 2
   // 3 4 5
   // 6 7 8
-  // Return 0, 1 or 2
+  // Return 0, 1, 2, 3
   // 0 = not Game Over, 1 = Game Over player 1 won, 2 = Game Over player 2 won
+  // 3 = a tie game
   var g = window.board;
   if(g[0] === g[1] && g[1] === g[2] && g[2] !== 0) {
     return g[0];
@@ -67,6 +68,10 @@ function isGameOver() {
   }
   if(g[2] === g[4] && g[4] === g[6] && g[6] !== 0) {
     return g[2];
+  }
+
+  if(window.game.length === 9) {
+    return 3;
   }
 
   return 0;
@@ -133,15 +138,10 @@ function simulateGame() {
   // TODO: implement Game Over
   addMessage("Starting game...", "level1");
   window.game = [];
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
-  simulateMove();
+  while (isGameOver() === 0) {
+    simulateMove();
+  }
+  addMessage("Game over", "level1");
 }
 
 function trainComputer() {
