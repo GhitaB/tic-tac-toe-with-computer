@@ -174,14 +174,38 @@ function trainComputer(numberOfGames) {
     console.log("New game... The winner is:");
     simulateGame();
     saveGame();
-    if (i < numberOfGames - 1) {
-      clearGame();
-    }
+    clearGame();
   }
 }
 
+function findMove(aGame, aBoard) {
+  // TODO: Check for best historical move LOL
+  return -1;
+}
+
+function giveMeNextMove(aGame, aBoard) {
+  // Input: a started game
+  // Output: next move to be played, based on games history (if something good
+  // is found) or just random
+  window.game = aGame;
+  window.board = aBoard;
+  console.log(window.game);
+  var move = findMove(aGame, aBoard);
+  if (move === -1) {
+    console.log("No move found in history. A random one:");
+    move = randomMove();
+  }
+  console.log(move);
+}
+
 // Start
+console.log("TRAIN =============");
 trainComputer(10);
+console.log("PLAY =============");
+giveMeNextMove(
+  [1, 2, 3, 4, 5, 6],
+  [1, 2, 1, 2, 1, 2, 0, 0, 0]
+);
 
     </script>
     <style>
