@@ -34,7 +34,13 @@ function getRandomInt(min, max) {
 
 function drawMove() {
   var move = window.game[window.game.length - 1];
-  console.log("DRAW", move);
+  var player = move % 2 + 1;
+  var text = "X";
+  if (player === 2) {
+    text = "0";
+  }
+  var box = document.querySelector('.box.x' + move + '');
+  box.textContent = text;
 }
 
 function randomMove() {
