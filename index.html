@@ -19,16 +19,20 @@
         <div class="box x9"></div>
       </div>
       <div class="console">
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<p>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<p>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<p>
       </div>
     </div>
     <script>
 window.games = [];
 window.game = [];
 
+function addMessage(text, level) {
+  var msg = "<p class=' " + level +"'>" + text + "</p>";
+  var console = document.querySelector('.console');
+  console.innerHTML += msg;
+}
+
 function getRandomInt(min, max) {
+  addMessage("Generating random number.", "level5");
   return Math.floor(Math.random() * max) + min;
 }
 
@@ -41,15 +45,18 @@ function drawMove() {
   }
   var box = document.querySelector('.box.x' + move + '');
   box.textContent = text;
+  addMessage("Draw move.", "level4");
 }
 
 function randomMove() {
   var res = getRandomInt(1, 9);
   console.log(res);
+  addMessage("Random move.", "level3");
   return res;
 }
 
 function simulateMove() {
+  addMessage("Simulate move.", "level2");
   var move = randomMove();
   window.game.push(move);
   drawMove();
@@ -57,6 +64,7 @@ function simulateMove() {
 }
 
 function simulateGame() {
+  addMessage("Starting game...", "level1");
   window.game = [];
   simulateMove();
   simulateMove();
@@ -103,8 +111,29 @@ body {
 
 .console {
   padding: 10px;
-  max-height: 400px;
-  color: #ddd;
+  max-height: 250px;
+  background: #333;
+  overflow: auto;
+}
+
+.level1 {
+  color: #FFF;
+}
+
+.level2 {
+  color: #DDD;
+}
+
+.level3 {
+  color: #BBB;
+}
+
+.level4 {
+  color: #888;
+}
+
+.level5 {
+  color: #555;
 }
     </style>
   </body>
