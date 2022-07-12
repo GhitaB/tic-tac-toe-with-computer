@@ -180,6 +180,24 @@ function trainComputer(numberOfGames) {
 
 function findMove(aGame, aBoard) {
   // TODO: Check for best historical move LOL
+  for (var i = 0; i < window.games.length; i++) {
+    var game = window.games[i];
+    var foundGames = [];
+    var selected = true;
+    for (var j = 0; j < aGame.length; j++) {
+      if (game[j] !== aGame[j]) {
+        selected = false;
+      }
+    }
+    if (selected) {
+      foundGames.push(game);
+    }
+  }
+  console.log(foundGames);
+  var bestGame = 0;  // TODO: select the best games from found
+  if (foundGames.length > 0) {
+    return foundGames[bestGame][aGame.length + 1];
+  }
   return -1;
 }
 
@@ -194,6 +212,8 @@ function giveMeNextMove(aGame, aBoard) {
   if (move === -1) {
     console.log("No move found in history. A random one:");
     move = randomMove();
+  } else {
+    console.log("FOOOOOOOUNDDDDDDDDD!")
   }
   console.log(move);
 }
@@ -203,8 +223,8 @@ console.log("TRAIN =============");
 trainComputer(10);
 console.log("PLAY =============");
 giveMeNextMove(
-  [1, 2, 3, 4, 5, 6],
-  [1, 2, 1, 2, 1, 2, 0, 0, 0]
+  [1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0]
 );
 
     </script>
