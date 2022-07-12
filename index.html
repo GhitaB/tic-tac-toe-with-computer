@@ -111,10 +111,12 @@ function drawMove() {
 
 function randomMove() {
   // Generate a move on the board (random position from 1 to 9)
-  // TODO: return only valid move (not already filled)
   var res = getRandomInt(1, 9);
-  addMessage("Random move.", "level3");
-  return res;
+  if(window.board[res - 1] === 0) {
+    return res;
+  }
+  console.log("Wrong move");
+  return randomMove();
 }
 
 function simulateMove() {
