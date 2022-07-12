@@ -32,6 +32,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * max) + min;
 }
 
+function drawMove() {
+  var move = window.game[window.game.length - 1];
+  console.log("DRAW", move);
+}
+
 function randomMove() {
   var res = getRandomInt(1, 9);
   console.log(res);
@@ -41,6 +46,7 @@ function randomMove() {
 function simulateMove() {
   var move = randomMove();
   window.game.push(move);
+  drawMove();
   console.log(window.game);
 }
 
