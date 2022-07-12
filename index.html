@@ -26,30 +26,48 @@ window.games = [];
 window.game = [];
 
 function addMessage(text, level) {
+  // Append a message in the console
   var msg = "<p class=' " + level +"'>" + text + "</p>";
   var console = document.querySelector('.console');
   console.innerHTML += msg;
 }
 
 function getRandomInt(min, max) {
+  // Get a random number between min and max
   addMessage("Generating random number.", "level5");
   return Math.floor(Math.random() * max) + min;
 }
 
+function lastMove() {
+  // Get the order of lastest move in the game
+  return window.game.length - 1;
+}
+
+function lastPosition() {
+  // Get the latest position filled in the board
+  return window.game[lastMove()];
+}
+
+function lastPlayer() {
+  // Who moved last time?
+  return lastMove() % 2 + 1;
+}
+
 function drawMove() {
-  var move = window.game.length - 1;
-  var position = window.game[window.game.length - 1];
-  var player = move % 2 + 1;
+  // Draw the latest move on the board (in the correct position for
+  // correct player
   var text = "X";
-  if (player === 2) {
+  if (lastPlayer() === 2) {
     text = "O";
   }
-  var box = document.querySelector('.box.x' + position + '');
+  var box = document.querySelector('.box.x' + lastPosition() + '');
   box.textContent = text;
   addMessage("Draw move.", "level4");
 }
 
 function randomMove() {
+  // Generate a move on the board (random position from 1 to 9)
+  // TODO: return only valid move (not already filled)
   var res = getRandomInt(1, 9);
   console.log(res);
   addMessage("Random move.", "level3");
@@ -57,6 +75,7 @@ function randomMove() {
 }
 
 function simulateMove() {
+  // Get a random move and put it on the board
   addMessage("Simulate move.", "level2");
   var move = randomMove();
   window.game.push(move);
@@ -65,6 +84,8 @@ function simulateMove() {
 }
 
 function simulateGame() {
+  // Repeat get random move until the game is finished
+  // TODO: implement Game Over
   addMessage("Starting game...", "level1");
   window.game = [];
   simulateMove();
@@ -79,10 +100,13 @@ function simulateGame() {
 }
 
 function trainComputer() {
+  // To be used before playing with computer. It simulates a number of games,
+  // saves them in the history, to be used for later better moves.
   simulateGame();
   simulateGame();
 }
 
+// Start
 trainComputer();
     </script>
     <style>
