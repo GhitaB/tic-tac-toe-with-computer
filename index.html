@@ -110,7 +110,6 @@ function drawMove() {
   var box = document.querySelector('.box.x' + position + '');
   box.textContent = text;
   window.board[position - 1] = player;
-  console.log(window.board);
   addMessage("Draw move.", "level4");
 }
 
@@ -120,7 +119,6 @@ function randomMove() {
   if(window.board[res - 1] === 0) {
     return res;
   }
-  console.log("Wrong move");
   return randomMove();
 }
 
@@ -130,7 +128,6 @@ function simulateMove() {
   var move = randomMove();
   window.game.push(move);
   drawMove();
-  console.log(isGameOver());
 }
 
 function simulateGame() {
@@ -142,6 +139,7 @@ function simulateGame() {
   }
 
   var status = isGameOver();
+  console.log(status);
 
   addMessage("Game over", "level1");
   if(status === 1) {
@@ -155,14 +153,26 @@ function simulateGame() {
   }
 }
 
-function trainComputer() {
+function clearGame() {
+  // Clear the latest game
+  window.game = [];
+  window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+function trainComputer(numberOfGames) {
   // To be used before playing with computer. It simulates a number of games,
   // saves them in the history, to be used for later better moves.
-  simulateGame();
+  // TODO: save games
+  for (var i = 0; i < numberOfGames; i++) {
+    console.log("New game... The winner is:");
+    simulateGame();
+    clearGame();
+  }
 }
 
 // Start
-trainComputer();
+trainComputer(50);
+
     </script>
     <style>
 body {
