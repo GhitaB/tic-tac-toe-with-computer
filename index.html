@@ -37,13 +37,14 @@ function getRandomInt(min, max) {
 }
 
 function drawMove() {
-  var move = window.game[window.game.length - 1];
+  var move = window.game.length - 1;
+  var position = window.game[window.game.length - 1];
   var player = move % 2 + 1;
   var text = "X";
   if (player === 2) {
     text = "O";
   }
-  var box = document.querySelector('.box.x' + move + '');
+  var box = document.querySelector('.box.x' + position + '');
   box.textContent = text;
   addMessage("Draw move.", "level4");
 }
@@ -73,14 +74,11 @@ function simulateGame() {
   simulateMove();
   simulateMove();
   simulateMove();
+  simulateMove();
+  simulateMove();
 }
 
 function trainComputer() {
-  simulateGame();
-  simulateGame();
-  simulateGame();
-  simulateGame();
-  simulateGame();
   simulateGame();
   simulateGame();
 }
