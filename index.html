@@ -135,13 +135,24 @@ function simulateMove() {
 
 function simulateGame() {
   // Repeat get random move until the game is finished
-  // TODO: implement Game Over
   addMessage("Starting game...", "level1");
   window.game = [];
   while (isGameOver() === 0) {
     simulateMove();
   }
+
+  var status = isGameOver();
+
   addMessage("Game over", "level1");
+  if(status === 1) {
+    addMessage("Player X won", "level1");
+  }
+  if(status === 2) {
+    addMessage("Player O won", "level1");
+  }
+  if(status === 3) {
+    addMessage("A tie game", "level1");
+  }
 }
 
 function trainComputer() {
