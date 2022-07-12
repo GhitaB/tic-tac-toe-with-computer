@@ -25,6 +25,38 @@
       </div>
     </div>
     <script>
+window.games = [];
+window.game = [];
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * max) + min;
+}
+
+function randomMove() {
+  var res = getRandomInt(1, 9);
+  console.log(res);
+  return res;
+}
+
+function simulateMove() {
+  var move = randomMove();
+  window.game.push(move);
+  console.log(window.game);
+}
+
+function simulateGame() {
+  window.game = [];
+  simulateMove();
+  simulateMove();
+  simulateMove();
+  simulateMove();
+  simulateMove();
+  simulateMove();
+  simulateMove();
+}
+
+simulateGame();
+
     </script>
     <style>
 body {
