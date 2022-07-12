@@ -163,13 +163,17 @@ function clearGame() {
    }
 }
 
+function saveGame() {
+  window.games.push(window.game);
+}
+
 function trainComputer(numberOfGames) {
   // To be used before playing with computer. It simulates a number of games,
   // saves them in the history, to be used for later better moves.
-  // TODO: save games
   for (var i = 0; i < numberOfGames; i++) {
     console.log("New game... The winner is:");
     simulateGame();
+    saveGame();
     if (i < numberOfGames - 1) {
       clearGame();
     }
@@ -177,7 +181,7 @@ function trainComputer(numberOfGames) {
 }
 
 // Start
-trainComputer(50);
+trainComputer(10);
 
     </script>
     <style>
