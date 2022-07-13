@@ -138,14 +138,8 @@ function humanMove(position) {
   drawMove();
 }
 
-function simulateGame() {
-  // Repeat get random move until the game is finished
-  addMessage("Starting game...", "level1");
-  window.game = [];
-  while (isGameOver() === 0) {
-    simulateMove();
-  }
-
+function finishGame() {
+  // Check the status of the game and show the message
   var status = isGameOver();
   console.log(whoIs(status));
 
@@ -159,6 +153,17 @@ function simulateGame() {
   if(status === 3) {
     addMessage("A tie game", "level1");
   }
+}
+
+function simulateGame() {
+  // Repeat get random move until the game is finished
+  addMessage("Starting game...", "level1");
+  window.game = [];
+  while (isGameOver() === 0) {
+    simulateMove();
+  }
+
+  finishGame();
 }
 
 function clearGame() {
@@ -253,6 +258,8 @@ function youMove() {
 }
 
 function computerMove() {
+  // Computer plays
+  addMessage("Computer moves!", 'level2');
   simulateMove();
 }
 
@@ -260,14 +267,6 @@ function gameWithComputer() {
   // Human vs Computer game
   addMessage("Starting a game with the computer!", 'level1');
   youMove();
-  // while (isGameOver() === 0) {
-  //   if (window.game.length % 2 === 0) {
-  //     youMove();
-  //   } else {
-  //     // simulateMove();
-  //
-  //   }
-  // }
 }
 
 document.addEventListener('click', function (event) {
@@ -279,11 +278,15 @@ document.addEventListener('click', function (event) {
         if (className[0] === "x") {
           var position = parseInt(className[1])
           humanMove(position);
-          if (window.game.length < 9) {
-            computerMove();
-          }
-          if (window.game.length < 9) {
-            youMove();
+          if(isGameOver() !== 0) {
+            finishGame();
+          } else {
+            if (window.game.length < 9) {
+              computerMove();
+            }
+            if (window.game.length < 9) {
+              youMove();
+            }
           }
         }
       }
