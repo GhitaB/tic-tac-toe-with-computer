@@ -237,13 +237,21 @@ function findMove(aGame, aBoard) {
   var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
-    var selected = true;
+    var similar = true;
     for (var j = 0; j < aGame.length; j++) {
       if (game[j] !== aGame[j]) {
-        selected = false;
+        similar = false;
       }
     }
-    if (selected) {
+    if (similar) {
+      console.log("I found a similar game!", game);
+      var expected = ""
+      if (window.winners[i] === 1) {
+        expected = "but you will win.";
+      } else {
+        expected = "and I will win.";
+      }
+      console.log("I will play like this ", expected);
       foundGames.push(game);
     }
   }
