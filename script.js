@@ -6,8 +6,8 @@ window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];  // current game, the board
 function addMessage(text, level) {
   // Append a message in the console
   var msg = "<p class=' " + level +"'>" + text + "</p>";
-  var console = document.querySelector('.console');
-  console.innerHTML += msg;
+  var cons = document.querySelector('.console');
+  cons.innerHTML = msg + cons.innerHTML;
 }
 
 function whoIs(input) {
@@ -19,6 +19,9 @@ function whoIs(input) {
     return "O";
   }
   if (input === 0) {
+    return "-";
+  }
+  if (input === 3) {
     return "-";
   }
 }
@@ -173,7 +176,7 @@ function trainComputer(numberOfGames) {
     simulateGame();
     logBoard();
     saveGame();
-    // clearGame();
+    clearGame();
   }
 }
 
@@ -219,7 +222,7 @@ function giveMeNextMove(aGame, aBoard) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(1);
+trainComputer(3);
 console.log("PLAY =============");
 // giveMeNextMove(
 //   [1],
