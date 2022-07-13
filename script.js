@@ -1,4 +1,38 @@
+// Player 1 = X
+// Player 2 = O
+// Player 1 will always start.
+
+// A game example: [1, 7, 9, 6, 5]
+// This is the history for this game:
+//         How the board looks in each case:
+// - - -
+// - - -   [0, 0, 0, 0, 0, 0, 0, 0, 0]
+// - - -
+//
+// X - -
+// - - -   [1, 0, 0, 0, 0, 0, 0, 0, 0]
+// - - -
+//
+// X - -
+// - - -   [1, 0, 0, 0, 0, 0, 2, 0, 0]
+// O - -
+//
+// X - -
+// - - -   [1, 0, 0, 0, 0, 0, 2, 0, 1]
+// O - X
+//
+// X - -
+// - - O   [1, 0, 0, 0, 0, 2, 2, 0, 1]
+// O - X
+//
+// X - -
+// - X O   [1, 0, 0, 0, 1, 2, 2, 0, 1]
+// O - X
+//
+// The winner is X.
+
 window.games = [];  // the history of games
+window.winners = [];  // the history of winners for each game (0 = tie, 1, 2)
 window.game = [];  // current game, the history of positions
 window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];  // current game, the board
       // 0 = empty, 1 = player 1 played here, 2 = player 2 played here
@@ -228,7 +262,6 @@ function giveMeNextMove(aGame, aBoard) {
     move = randomMove();
   } else {
     console.log("FOOOOOOOUNDDDDDDDDD!")
-    move = randomMove(); // TODO: select a good move if possible
   }
   console.log(move);
   return move;
