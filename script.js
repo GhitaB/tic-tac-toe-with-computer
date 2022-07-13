@@ -283,8 +283,12 @@ document.addEventListener('click', function (event) {
           } else {
             if (window.game.length < 9) {
               computerMove();
+              if(isGameOver() !== 0) {
+                finishGame();
+                disableBoxesClickable();
+              }
             }
-            if (window.game.length < 9) {
+            if (window.game.length < 9 && isGameOver() === 0) {
               youMove();
             }
           }
