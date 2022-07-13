@@ -252,10 +252,22 @@ function youMove() {
   makeBoxesClickable();
 }
 
+function computerMove() {
+  simulateMove();
+}
+
 function gameWithComputer() {
   // Human vs Computer game
   addMessage("Starting a game with the computer!", 'level1');
   youMove();
+  // while (isGameOver() === 0) {
+  //   if (window.game.length % 2 === 0) {
+  //     youMove();
+  //   } else {
+  //     // simulateMove();
+  //
+  //   }
+  // }
 }
 
 document.addEventListener('click', function (event) {
@@ -267,6 +279,12 @@ document.addEventListener('click', function (event) {
         if (className[0] === "x") {
           var position = parseInt(className[1])
           humanMove(position);
+          if (window.game.length < 9) {
+            computerMove();
+          }
+          if (window.game.length < 9) {
+            youMove();
+          }
         }
       }
     );
