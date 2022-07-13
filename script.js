@@ -31,8 +31,6 @@
 //
 // The winner is X.
 
-// TODO: save winners, to help evaluate future moves
-
 window.games = [];  // the history of games
 window.winners = [];  // the history of winners for each game (0 = tie, 1, 2)
 window.game = [];  // current game, the history of positions
@@ -394,7 +392,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(50000);
+trainComputer(5000);
 console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
