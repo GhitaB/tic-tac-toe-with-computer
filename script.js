@@ -31,6 +31,8 @@
 //
 // The winner is X.
 
+// TODO: save winners, to help evaluate future moves
+
 window.games = [];  // the history of games
 window.winners = [];  // the history of winners for each game (0 = tie, 1, 2)
 window.game = [];  // current game, the history of positions
@@ -228,9 +230,9 @@ function trainComputer(numberOfGames) {
 
 function findMove(aGame, aBoard) {
   // TODO: Check for best historical move LOL
+  var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
-    var foundGames = [];
     var selected = true;
     for (var j = 0; j < aGame.length; j++) {
       if (game[j] !== aGame[j]) {
@@ -244,7 +246,7 @@ function findMove(aGame, aBoard) {
   console.log(foundGames);
   var bestGame = 0;  // TODO: select the best games from found
   if (foundGames.length > 0) {
-    return foundGames[bestGame][aGame.length + 1];
+    return foundGames[bestGame][aGame.length];
   }
   return -1;
 }
@@ -346,7 +348,3 @@ console.log("TRAIN =============");
 trainComputer(10);
 console.log("PLAY =============");
 gameWithComputer();
-// giveMeNextMove(
-//   [1],
-//   [1, 0, 0, 0, 0, 0, 0, 0, 0]
-// );
