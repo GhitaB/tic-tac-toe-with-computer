@@ -178,7 +178,7 @@ function finishGame() {
   // Check the status of the game and show the message
   // TODO: Saving the winner - move to save game
   var status = isGameOver();
-  console.log(whoIs(status));
+  // console.log(whoIs(status));
 
   // addMessage("Game over", "level1");
   if(status === 1) {
@@ -267,7 +267,7 @@ function findMove(aGame, aBoard) {
       }
     }
     if (similar) {
-      console.log("I found a similar game!", game);
+      // console.log("I found a similar game!", game);
       var expected = ""
       var possibleWinner = 1;
       if (window.winners[i] === 1) {
@@ -276,7 +276,7 @@ function findMove(aGame, aBoard) {
         expected = "I will win.";
         possibleWinner = 2;
       }
-      console.log("If I will play like this ", expected);
+      // console.log("If I will play like this ", expected);
       foundGames.push(
         {
           game: game,
@@ -287,7 +287,7 @@ function findMove(aGame, aBoard) {
   }
 
   if (foundGames.length > 1) {
-    console.log("So I found multiple similar games! I will evaluate them.");
+    // console.log("So I found multiple similar games! I will evaluate them.");
     var evaluated = evaluateGames(foundGames);
     console.log("Evaluated games:", evaluated);
     foundGames = evaluated;
@@ -306,22 +306,22 @@ function giveMeNextMove(aGame, aBoard) {
   // is found) or just random
   window.game = aGame;
   window.board = aBoard;
-  console.log(window.game);
+  // console.log(window.game);
   var move = findMove(aGame, aBoard);
   if (move === -1) {
     console.log("No move found in history. A random one:");
     move = randomMove();
   } else {
-    console.log("FOOOOOOOUNDDDDDDDDD!")
+    // console.log("FOOOOOOOUNDDDDDDDDD!")
   }
-  console.log(move);
+  // console.log(move);
   return move;
 }
 
 function makeBoxesClickable() {
   // Prepare the board for human move
   for (var i = 1; i <= window.board.length; i++) {
-    console.log(window.board);
+    // console.log(window.board);
     if (window.board[i - 1] === 0) {
       var box = document.querySelector('.box.x' + i + '');
       box.classList.add("clickable");
@@ -394,7 +394,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(1000);
+trainComputer(50000);
 console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
