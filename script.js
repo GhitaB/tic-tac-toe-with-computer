@@ -232,8 +232,31 @@ function trainComputer(numberOfGames) {
   }
 }
 
+function evaluateGames(gamesList) {
+  // Input: a list of games
+  // Output: the list of games sorted by a score - the best first
+  var tempList = [];
+  for (var i = 0; i < gamesList.length; i++) {
+    var game = gamesList[i].game;
+    var winner = gamesList[i].winner;
+    var score = 0;  // Lowest score
+    if (winner === 2) {
+      score = 1;
+      score += (9 - game.length);  // Let's say a shorter game is a better one
+    }
+    tempList.push({
+      game: game,
+      winner: winner,
+      score: score
+    })
+  }
+  // TODO: sort
+  //
+  return tempList;
+}
+
 function findMove(aGame, aBoard) {
-  // TODO: Check for best historical move LOL
+  // Search for similar games, and select the best move after evaluating them
   var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
@@ -265,6 +288,8 @@ function findMove(aGame, aBoard) {
 
   if (foundGames.length > 1) {
     console.log("So I found multiple similar games! I will evaluate them.");
+    var evaluated = evaluateGames(foundGames);
+    console.log("Evaluated games:", evaluated);
   }
 
   console.log(foundGames);
