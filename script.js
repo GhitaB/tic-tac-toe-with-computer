@@ -131,6 +131,13 @@ function simulateMove() {
   drawMove();
 }
 
+function humanMove(position) {
+  // Record a human move
+  addMessage("You moved.", "level2");
+  window.game.push(position);
+  drawMove();
+}
+
 function simulateGame() {
   // Repeat get random move until the game is finished
   addMessage("Starting game...", "level1");
@@ -242,6 +249,22 @@ function gameWithComputer() {
   addMessage("Starting a game with the computer!", 'level1');
   youMove();
 }
+
+document.addEventListener('click', function (event) {
+  if (event.target.matches('.clickable')) {
+    event.preventDefault();
+    event.target.classList.forEach(
+      (className) => {
+        if (className[0] === "x") {
+          var position = parseInt(className[1])
+          humanMove(position);
+        }
+      }
+    );
+  }
+
+  return;
+}, false);
 
 // Start
 console.log("TRAIN =============");
