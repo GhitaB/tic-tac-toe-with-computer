@@ -238,6 +238,14 @@ function makeBoxesClickable() {
   }
 }
 
+function disableBoxesClickable() {
+  // Disable boxes until next move
+  for (var i = 1; i <= window.board.length; i++) {
+    var box = document.querySelector('.box.x' + i + '');
+    box.classList.remove("clickable");
+  }
+}
+
 function youMove() {
   // Human plays
   addMessage("You move!", 'level2');
@@ -252,6 +260,7 @@ function gameWithComputer() {
 
 document.addEventListener('click', function (event) {
   if (event.target.matches('.clickable')) {
+    disableBoxesClickable();
     event.preventDefault();
     event.target.classList.forEach(
       (className) => {
