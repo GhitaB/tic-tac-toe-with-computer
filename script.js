@@ -220,10 +220,34 @@ function giveMeNextMove(aGame, aBoard) {
   console.log(move);
 }
 
+function makeBoxesClickable() {
+  // Prepare the board for human move
+  for (var i = 1; i <= window.board.length; i++) {
+    console.log(window.board);
+    if (window.board[i - 1] === 0) {
+      var box = document.querySelector('.box.x' + i + '');
+      box.classList.add("clickable");
+    }
+  }
+}
+
+function youMove() {
+  // Human plays
+  addMessage("You move!", 'level2');
+  makeBoxesClickable();
+}
+
+function gameWithComputer() {
+  // Human vs Computer game
+  addMessage("Starting a game with the computer!", 'level1');
+  youMove();
+}
+
 // Start
 console.log("TRAIN =============");
 trainComputer(3);
 console.log("PLAY =============");
+gameWithComputer();
 // giveMeNextMove(
 //   [1],
 //   [1, 0, 0, 0, 0, 0, 0, 0, 0]
