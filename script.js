@@ -246,19 +246,31 @@ function findMove(aGame, aBoard) {
     if (similar) {
       console.log("I found a similar game!", game);
       var expected = ""
+      var possibleWinner = 1;
       if (window.winners[i] === 1) {
-        expected = "but you will win.";
+        expected = "you will win.";
       } else {
-        expected = "and I will win.";
+        expected = "I will win.";
+        possibleWinner = 2;
       }
-      console.log("I will play like this ", expected);
-      foundGames.push(game);
+      console.log("If I will play like this ", expected);
+      foundGames.push(
+        {
+          game: game,
+          winner: possibleWinner
+        }
+      );
     }
   }
+
+  if (foundGames.length > 1) {
+    console.log("So I found multiple similar games! I will evaluate them.");
+  }
+
   console.log(foundGames);
   var bestGame = 0;  // TODO: select the best games from found
   if (foundGames.length > 0) {
-    return foundGames[bestGame][aGame.length];
+    return foundGames[bestGame]["game"][aGame.length];
   }
   return -1;
 }
@@ -357,6 +369,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(10);
+trainComputer(40);
+console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
