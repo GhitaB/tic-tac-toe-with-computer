@@ -176,18 +176,22 @@ function humanMove(position) {
 
 function finishGame() {
   // Check the status of the game and show the message
+  // TODO: Saving the winner - move to save game
   var status = isGameOver();
   console.log(whoIs(status));
 
   addMessage("Game over", "level1");
   if(status === 1) {
     addMessage("Player X won", "level1");
+    window.winners.push(1);
   }
   if(status === 2) {
     addMessage("Player O won", "level1");
+    window.winners.push(2);
   }
   if(status === 3) {
     addMessage("A tie game", "level1");
+    window.winners.push(0);
   }
 }
 
