@@ -36,6 +36,7 @@ window.winners = [];  // the history of winners for each game (0 = tie, 1, 2)
 window.game = [];  // current game, the history of positions
 window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];  // current game, the board
       // 0 = empty, 1 = player 1 played here, 2 = player 2 played here
+window.trainingMode = true;  // changed to false before real play
 
 function addMessage(text, level) {
   // Append a message in the console
@@ -180,15 +181,21 @@ function finishGame() {
 
   // addMessage("Game over", "level1");
   if(status === 1) {
-    // addMessage("Player X won", "level1");
+    if (!window.trainingMode) {
+      addMessage("Player X won", "level1");
+    }
     window.winners.push(1);
   }
   if(status === 2) {
-    // addMessage("Player O won", "level1");
+    if (!window.trainingMode) {
+      addMessage("Player O won", "level1");
+    }
     window.winners.push(2);
   }
   if(status === 3) {
-    // addMessage("A tie game", "level1");
+    if (!window.trainingMode) {
+      addMessage("A tie game", "level1");
+    }
     window.winners.push(0);
   }
 }
@@ -394,8 +401,9 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(5000); // TODO: train using existing games history and the same
+trainComputer(50000); // TODO: train using existing games history and the same
 // strategy as in real play mode. Use random moves only when nothing better.
 console.log(window.games);
 console.log("PLAY =============");
+window.trainingMode = false;
 gameWithComputer();
