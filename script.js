@@ -116,7 +116,7 @@ function isGameOver() {
 
 function getRandomInt(min, max) {
   // Get a random number between min and max
-  addMessage("Generating random number.", "level5");
+  // addMessage("Generating random number.", "level5");
   return Math.floor(Math.random() * max) + min;
 }
 
@@ -161,10 +161,10 @@ function randomMove() {
 
 function simulateMove() {
   // Get a random move and put it on the board
-  addMessage("Simulate move.", "level2");
+  // addMessage("Simulate move.", "level2");
   var move = randomMove();
   window.game.push(move);
-  drawMove();
+  // drawMove();
 }
 
 function humanMove(position) {
@@ -180,24 +180,24 @@ function finishGame() {
   var status = isGameOver();
   console.log(whoIs(status));
 
-  addMessage("Game over", "level1");
+  // addMessage("Game over", "level1");
   if(status === 1) {
-    addMessage("Player X won", "level1");
+    // addMessage("Player X won", "level1");
     window.winners.push(1);
   }
   if(status === 2) {
-    addMessage("Player O won", "level1");
+    // addMessage("Player O won", "level1");
     window.winners.push(2);
   }
   if(status === 3) {
-    addMessage("A tie game", "level1");
+    // addMessage("A tie game", "level1");
     window.winners.push(0);
   }
 }
 
 function simulateGame() {
   // Repeat get random move until the game is finished
-  addMessage("Starting game...", "level1");
+  // addMessage("Starting game...", "level1");
   window.game = [];
   while (isGameOver() === 0) {
     simulateMove();
@@ -224,9 +224,10 @@ function trainComputer(numberOfGames) {
   // To be used before playing with computer. It simulates a number of games,
   // saves them in the history, to be used for later better moves.
   for (var i = 0; i < numberOfGames; i++) {
-    console.log("New game... The winner is:");
+    console.log(i);
+    // console.log("New game... The winner is:");
     simulateGame();
-    logBoard();
+    // logBoard();
     saveGame();
     clearGame();
   }
@@ -393,7 +394,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(200);
+trainComputer(1000);
 console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
