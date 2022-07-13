@@ -289,13 +289,13 @@ function findMove(aGame, aBoard) {
     console.log("So I found multiple similar games! I will evaluate them.");
     var evaluated = evaluateGames(foundGames);
     console.log("Evaluated games:", evaluated);
+    foundGames = evaluated;
   }
 
-  console.log(foundGames);
-  var bestGame = 0;  // TODO: select the best games from found
   if (foundGames.length > 0) {
-    return foundGames[bestGame]["game"][aGame.length];
+    return foundGames[0]["game"][aGame.length];
   }
+
   return -1;
 }
 
@@ -393,7 +393,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(40);
+trainComputer(200);
 console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
