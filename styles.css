@@ -1,0 +1,47 @@
+body {
+  background: #111;
+}
+
+.container {
+  background: #444;
+  width: 600px;
+  margin: auto;
+}
+
+.box {
+  background: #333;
+  width: 180px;
+  height: 180px;
+  float: left;
+  border: 10px solid #111;
+  font-size: 150px;
+  color: white;
+  text-align: center;
+}
+
+.console {
+  padding: 10px;
+  max-height: 250px;
+  background: #333;
+  overflow: auto;
+}
+
+.level1 {
+  color: #FFF;
+}
+
+.level2 {
+  color: #DDD;
+}
+
+.level3 {
+  color: #BBB;
+}
+
+.level4 {
+  color: #888;
+}
+
+.level5 {
+  color: #555;
+}
