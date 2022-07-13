@@ -250,9 +250,8 @@ function evaluateGames(gamesList) {
       score: score
     })
   }
-  // TODO: sort
-  //
-  return tempList;
+
+  return tempList.sort((a, b) => b.score - a.score);
 }
 
 function findMove(aGame, aBoard) {
