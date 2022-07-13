@@ -228,8 +228,10 @@ function giveMeNextMove(aGame, aBoard) {
     move = randomMove();
   } else {
     console.log("FOOOOOOOUNDDDDDDDDD!")
+    move = randomMove(); // TODO: select a good move if possible
   }
   console.log(move);
+  return move;
 }
 
 function makeBoxesClickable() {
@@ -260,7 +262,13 @@ function youMove() {
 function computerMove() {
   // Computer plays
   addMessage("Computer moves!", 'level2');
-  simulateMove();
+  // simulateMove(); - random case
+  //
+  // Improved, based on history:
+  addMessage("Computer is thinking... :D", "level2");
+  var move = giveMeNextMove(window.game, window.board);
+  window.game.push(move);
+  drawMove();
 }
 
 function gameWithComputer() {
@@ -302,7 +310,7 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(3);
+trainComputer(10);
 console.log("PLAY =============");
 gameWithComputer();
 // giveMeNextMove(
