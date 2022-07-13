@@ -255,6 +255,8 @@ function evaluateGames(gamesList) {
 
 function findMove(aGame, aBoard) {
   // Search for similar games, and select the best move after evaluating them
+  // TODO: before trying to find a good move, make sure computer plays the
+  // evident move - do not be stupid to think when nothing to think :))
   var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
@@ -392,7 +394,8 @@ document.addEventListener('click', function (event) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(5000);
+trainComputer(5000); // TODO: train using existing games history and the same
+// strategy as in real play mode. Use random moves only when nothing better.
 console.log(window.games);
 console.log("PLAY =============");
 gameWithComputer();
