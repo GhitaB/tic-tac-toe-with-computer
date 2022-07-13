@@ -5,9 +5,31 @@ window.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];  // current game, the board
 
 function addMessage(text, level) {
   // Append a message in the console
-  // var msg = "<p class=' " + level +"'>" + text + "</p>";
-  // var console = document.querySelector('.console');
-  // console.innerHTML += msg;
+  var msg = "<p class=' " + level +"'>" + text + "</p>";
+  var console = document.querySelector('.console');
+  console.innerHTML += msg;
+}
+
+function whoIs(input) {
+  // Return the player
+  if (input === 1) {
+    return "X";
+  }
+  if (input === 2) {
+    return "O";
+  }
+  if (input === 0) {
+    return "-";
+  }
+}
+
+function logBoard() {
+  // Console log the board in human readable format
+  var x = window.board;
+  console.log(window.board);
+  console.log(whoIs(x[0]), whoIs(x[1]), whoIs(x[2]));
+  console.log(whoIs(x[3]), whoIs(x[4]), whoIs(x[5]));
+  console.log(whoIs(x[5]), whoIs(x[6]), whoIs(x[7]));
 }
 
 function isGameOver() {
@@ -103,7 +125,7 @@ function simulateMove() {
   addMessage("Simulate move.", "level2");
   var move = randomMove();
   window.game.push(move);
-  // drawMove();
+  drawMove();
 }
 
 function simulateGame() {
@@ -115,7 +137,7 @@ function simulateGame() {
   }
 
   var status = isGameOver();
-  console.log(status);
+  console.log(whoIs(status));
 
   addMessage("Game over", "level1");
   if(status === 1) {
@@ -149,8 +171,9 @@ function trainComputer(numberOfGames) {
   for (var i = 0; i < numberOfGames; i++) {
     console.log("New game... The winner is:");
     simulateGame();
+    logBoard();
     saveGame();
-    clearGame();
+    // clearGame();
   }
 }
 
@@ -196,9 +219,9 @@ function giveMeNextMove(aGame, aBoard) {
 
 // Start
 console.log("TRAIN =============");
-trainComputer(10000);
+trainComputer(1);
 console.log("PLAY =============");
-giveMeNextMove(
-  [1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0]
-);
+// giveMeNextMove(
+//   [1],
+//   [1, 0, 0, 0, 0, 0, 0, 0, 0]
+// );
