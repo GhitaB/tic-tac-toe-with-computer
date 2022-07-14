@@ -400,8 +400,10 @@ document.addEventListener('click', function (event) {
 }, false);
 
 // Start
+var train = 100000;
+alert("I will train the computer with " + train + " simulated games. Wait, then you can play.");
 console.log("TRAIN =============");
-trainComputer(50000); // TODO: train using existing games history and the same
+trainComputer(train); // TODO: train using existing games history and the same
 // strategy as in real play mode. Use random moves only when nothing better.
 console.log(window.games);
 console.log("PLAY =============");
