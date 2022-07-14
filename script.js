@@ -400,7 +400,7 @@ document.addEventListener('click', function (event) {
 }, false);
 
 // Start
-var train = 100000;
+var train = 1;  // TODO: fix issue on simulating a game - something is not working as expected anymore.
 alert("I will train the computer with " + train + " simulated games. Wait, then you can play.");
 console.log("TRAIN =============");
 trainComputer(train); // TODO: train using existing games history and the same
