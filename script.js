@@ -163,7 +163,9 @@ function simulateMove() {
   // addMessage("Simulate move.", "level2");
   var move = randomMove();
   window.game.push(move);
-  // drawMove();
+  var player = lastPlayer();
+  var position = lastPosition();
+  window.board[position - 1] = player;
 }
 
 function humanMove(position) {
