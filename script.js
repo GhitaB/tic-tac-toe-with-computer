@@ -330,9 +330,7 @@ function check_stupid_moves(aGame, aBoard) {
   // 0 1 2
   // 3 4 5
   // 6 7 8
-  // Return 0, 1, 2, 3
-  // 0 = not Game Over, 1 = Game Over player 1 won, 2 = Game Over player 2 won
-  // 3 = a tie game
+  // Return -1 if no danger, or return the correct move to prevent fail
   var g = aBoard;
   var move = -1;
 
@@ -375,6 +373,55 @@ function check_stupid_moves(aGame, aBoard) {
     }
     if (issue === 2) {
       move = 8;
+    }
+    if (issue === 3) {
+      move = 9;
+    }
+  }
+
+  // 0 1 2
+  // 3 4 5
+  // 6 7 8
+
+  // Check first vertical line
+  var issue = danger_line([g[0], g[3], g[6]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 1;
+    }
+    if (issue === 2) {
+      move = 4;
+    }
+    if (issue === 3) {
+      move = 7;
+    }
+  }
+
+  // Check second vertical line
+  var issue = danger_line([g[1], g[4], g[7]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 2;
+    }
+    if (issue === 2) {
+      move = 5;
+    }
+    if (issue === 3) {
+      move = 8;
+    }
+  }
+
+  // Check 3rd vertical line
+  var issue = danger_line([g[2], g[5], g[8]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 3;
+    }
+    if (issue === 2) {
+      move = 6;
     }
     if (issue === 3) {
       move = 9;
