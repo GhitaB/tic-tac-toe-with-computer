@@ -159,8 +159,23 @@ function randomMove() {
 
 function simulateMove() {
   // Get a random move and put it on the board
-  // addMessage("Simulate move.", "level2");
   var move = randomMove();
+  window.game.push(move);
+  var player = lastPlayer();
+  var position = lastPosition();
+  window.board[position - 1] = player;
+}
+
+function simulateSmartMove() {
+  // Search for a good move, else
+  // Get a random move and put it on the board
+  var move = findMove(window.game, window.board)
+  console.log("MOVE: ", move);
+
+  if (move === -1) {
+    move = randomMove();
+  }
+
   window.game.push(move);
   var player = lastPlayer();
   var position = lastPosition();
@@ -203,7 +218,11 @@ function simulateGame() {
   // addMessage("Starting game...", "level1");
   window.game = [];
   while (isGameOver() === 0) {
-    simulateMove();
+    if (window.game.length % 2 === 0) {
+      simulateMove();
+    } else {
+      simulateSmartMove();
+    }
   }
 
   finishGame();
@@ -554,7 +573,7 @@ document.addEventListener('click', function (event) {
 }, false);
 
 // Start
-var train = 500000;
+var train = 10000;
 alert("I will train the computer with " + train + " simulated games. Wait, then you can play.");
 console.log("TRAIN =============");
 trainComputer(train);
