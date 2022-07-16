@@ -231,7 +231,6 @@ function trainComputer(numberOfGames) {
   // To be used before playing with computer. It simulates a number of games,
   // saves them in the history, to be used for later better moves.
   for (var i = 0; i < numberOfGames; i++) {
-    console.log(i);
     // console.log("New game... The winner is:");
     simulateGame();
     // logBoard();
@@ -266,6 +265,7 @@ function findMove(aGame, aBoard) {
   // Search for similar games, and select the best move after evaluating them
   // TODO: before trying to find a good move, make sure computer plays the
   // evident move - do not be stupid to think when nothing to think :))
+
   var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
@@ -309,6 +309,81 @@ function findMove(aGame, aBoard) {
   return -1;
 }
 
+function danger_line(line) {
+  // Check if human player will win on this line next move
+  if(line[0] === 0 && line[1] === 1 && line[2] === 1) {
+    return 1;
+  }
+
+  if(line[0] === 1 && line[1] === 0 && line[2] === 1) {
+    return 2;
+  }
+
+  if(line[0] === 1 && line[1] === 1 && line[2] === 0) {
+    return 3;
+  }
+
+  return -1;
+}
+
+function check_stupid_moves(aGame, aBoard) {
+  // 0 1 2
+  // 3 4 5
+  // 6 7 8
+  // Return 0, 1, 2, 3
+  // 0 = not Game Over, 1 = Game Over player 1 won, 2 = Game Over player 2 won
+  // 3 = a tie game
+  var g = aBoard;
+  var move = -1;
+
+  // Check first line
+  var issue = danger_line([g[0], g[1], g[2]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 1;
+    }
+    if (issue === 2) {
+      move = 2;
+    }
+    if (issue === 3) {
+      move = 3;
+    }
+  }
+
+  // Check second line
+  var issue = danger_line([g[3], g[4], g[5]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 4;
+    }
+    if (issue === 2) {
+      move = 5;
+    }
+    if (issue === 3) {
+      move = 6;
+    }
+  }
+
+  // Check 3rd line
+  var issue = danger_line([g[6], g[7], g[8]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 7;
+    }
+    if (issue === 2) {
+      move = 8;
+    }
+    if (issue === 3) {
+      move = 9;
+    }
+  }
+  console.log("Danger line on ", move);
+  return move;
+}
+
 function giveMeNextMove(aGame, aBoard) {
   // Input: a started game
   // Output: next move to be played, based on games history (if something good
@@ -316,6 +391,11 @@ function giveMeNextMove(aGame, aBoard) {
   window.game = aGame;
   window.board = aBoard;
   // console.log(window.game);
+  var res = check_stupid_moves(aGame, aBoard);
+  if (res > 0) {
+    console.log("Noooo, I will prevent this!");
+    return res;
+  }
   var move = findMove(aGame, aBoard);
   if (move === -1) {
     console.log("No move found in history. A random one:");
@@ -402,7 +482,7 @@ document.addEventListener('click', function (event) {
 }, false);
 
 // Start
-var train = 1;  // TODO: fix issue on simulating a game - something is not working as expected anymore.
+var train = 10;  // TODO: fix issue on simulating a game - something is not working as expected anymore.
 alert("I will train the computer with " + train + " simulated games. Wait, then you can play.");
 console.log("TRAIN =============");
 trainComputer(train); // TODO: train using existing games history and the same
