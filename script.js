@@ -146,7 +146,6 @@ function drawMove() {
   var box = document.querySelector('.box.x' + position + '');
   box.textContent = text;
   window.board[position - 1] = player;
-  addMessage("Draw move.", "level4");
 }
 
 function randomMove() {
@@ -177,11 +176,8 @@ function humanMove(position) {
 
 function finishGame() {
   // Check the status of the game and show the message
-  // TODO: Saving the winner - move to save game
   var status = isGameOver();
-  // console.log(whoIs(status));
 
-  // addMessage("Game over", "level1");
   if(status === 1) {
     if (!window.trainingMode) {
       addMessage("Player X won", "level1");
@@ -263,9 +259,6 @@ function evaluateGames(gamesList) {
 
 function findMove(aGame, aBoard) {
   // Search for similar games, and select the best move after evaluating them
-  // TODO: before trying to find a good move, make sure computer plays the
-  // evident move - do not be stupid to think when nothing to think :))
-
   var foundGames = [];
   for (var i = 0; i < window.games.length; i++) {
     var game = window.games[i];
@@ -561,11 +554,10 @@ document.addEventListener('click', function (event) {
 }, false);
 
 // Start
-var train = 10;  // TODO: fix issue on simulating a game - something is not working as expected anymore.
+var train = 500000;
 alert("I will train the computer with " + train + " simulated games. Wait, then you can play.");
 console.log("TRAIN =============");
-trainComputer(train); // TODO: train using existing games history and the same
-// strategy as in real play mode. Use random moves only when nothing better.
+trainComputer(train);
 console.log(window.games);
 console.log("PLAY =============");
 window.trainingMode = false;
