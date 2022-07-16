@@ -309,18 +309,19 @@ function findMove(aGame, aBoard) {
   return -1;
 }
 
-function danger_line(line) {
+function danger_line(line, moves) {
   // Check if human player will win on this line next move
+  // and prevent this
   if(line[0] === 0 && line[1] === 1 && line[2] === 1) {
-    return 1;
+    return moves[0];
   }
 
   if(line[0] === 1 && line[1] === 0 && line[2] === 1) {
-    return 2;
+    return moves[1];
   }
 
   if(line[0] === 1 && line[1] === 1 && line[2] === 0) {
-    return 3;
+    return moves[2];
   }
 
   return -1;
@@ -335,124 +336,50 @@ function check_stupid_moves(aGame, aBoard) {
   var move = -1;
 
   // Check first line
-  var issue = danger_line([g[0], g[1], g[2]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 1;
-    }
-    if (issue === 2) {
-      move = 2;
-    }
-    if (issue === 3) {
-      move = 3;
-    }
+  move = danger_line([g[0], g[1], g[2]], [1, 2, 3]);
+  if (move > 0) {
+    return move;
   }
 
   // Check second line
-  var issue = danger_line([g[3], g[4], g[5]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 4;
-    }
-    if (issue === 2) {
-      move = 5;
-    }
-    if (issue === 3) {
-      move = 6;
-    }
+  move = danger_line([g[3], g[4], g[5]], [4, 5, 6]);
+  if (move > 0) {
+    return move;
   }
 
   // Check 3rd line
-  var issue = danger_line([g[6], g[7], g[8]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 7;
-    }
-    if (issue === 2) {
-      move = 8;
-    }
-    if (issue === 3) {
-      move = 9;
-    }
+  move = danger_line([g[6], g[7], g[8]], [7, 8, 9]);
+  if (move > 0) {
+    return move;
   }
 
   // Check first vertical line
-  var issue = danger_line([g[0], g[3], g[6]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 1;
-    }
-    if (issue === 2) {
-      move = 4;
-    }
-    if (issue === 3) {
-      move = 7;
-    }
+  move = danger_line([g[0], g[3], g[6]], [1, 4, 7]);
+  if (move > 0) {
+    return move;
   }
 
   // Check second vertical line
-  var issue = danger_line([g[1], g[4], g[7]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 2;
-    }
-    if (issue === 2) {
-      move = 5;
-    }
-    if (issue === 3) {
-      move = 8;
-    }
+  move = danger_line([g[1], g[4], g[7]], [2, 5, 8]);
+  if (move > 0) {
+    return move;
   }
 
   // Check 3rd vertical line
-  var issue = danger_line([g[2], g[5], g[8]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 3;
-    }
-    if (issue === 2) {
-      move = 6;
-    }
-    if (issue === 3) {
-      move = 9;
-    }
+  move = danger_line([g[2], g[5], g[8]], [3, 6, 9]);
+  if (move > 0) {
+    return move;
   }
 
   // Check first diagonal
-  var issue = danger_line([g[0], g[4], g[8]]);
-
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 1;
-    }
-    if (issue === 2) {
-      move = 5;
-    }
-    if (issue === 3) {
-      move = 9;
-    }
+  move = danger_line([g[0], g[4], g[8]], [1, 5, 9]);
+  if (move > 0) {
+    return move;
   }
 
   // Check second diagonal
-  var issue = danger_line([g[2], g[4], g[6]]);
+  move = danger_line([g[2], g[4], g[6]], [3, 5, 7]);
 
-  if (issue > 0) {
-    if (issue === 1) {
-      move = 3;
-    }
-    if (issue === 2) {
-      move = 5;
-    }
-    if (issue === 3) {
-      move = 7;
-    }
-  }
   console.log("Danger line on ", move);
   return move;
 }
