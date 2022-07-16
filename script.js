@@ -379,10 +379,6 @@ function check_stupid_moves(aGame, aBoard) {
     }
   }
 
-  // 0 1 2
-  // 3 4 5
-  // 6 7 8
-
   // Check first vertical line
   var issue = danger_line([g[0], g[3], g[6]]);
 
@@ -425,6 +421,36 @@ function check_stupid_moves(aGame, aBoard) {
     }
     if (issue === 3) {
       move = 9;
+    }
+  }
+
+  // Check first diagonal
+  var issue = danger_line([g[0], g[4], g[8]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 1;
+    }
+    if (issue === 2) {
+      move = 5;
+    }
+    if (issue === 3) {
+      move = 9;
+    }
+  }
+
+  // Check second diagonal
+  var issue = danger_line([g[2], g[4], g[6]]);
+
+  if (issue > 0) {
+    if (issue === 1) {
+      move = 3;
+    }
+    if (issue === 2) {
+      move = 5;
+    }
+    if (issue === 3) {
+      move = 7;
     }
   }
   console.log("Danger line on ", move);
