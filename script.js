@@ -309,6 +309,23 @@ function findMove(aGame, aBoard) {
   return -1;
 }
 
+function happy_line(line, moves) {
+  // Check if computer player can win on this line and do this
+  if(line[0] === 0 && line[1] === 2 && line[2] === 2) {
+    return moves[0];
+  }
+
+  if(line[0] === 2 && line[1] === 0 && line[2] === 2) {
+    return moves[1];
+  }
+
+  if(line[0] === 2 && line[1] === 2 && line[2] === 0) {
+    return moves[2];
+  }
+
+  return -1;
+}
+
 function danger_line(line, moves) {
   // Check if human player will win on this line next move
   // and prevent this
@@ -325,6 +342,63 @@ function danger_line(line, moves) {
   }
 
   return -1;
+}
+
+function check_happy_moves(aGame, aBoard) {
+  // 0 1 2
+  // 3 4 5
+  // 6 7 8
+  // Return -1 if no happy move, or return the correct move to win
+  var g = aBoard;
+  var move = -1;
+
+  // Check first line
+  move = happy_line([g[0], g[1], g[2]], [1, 2, 3]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check second line
+  move = happy_line([g[3], g[4], g[5]], [4, 5, 6]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check 3rd line
+  move = happy_line([g[6], g[7], g[8]], [7, 8, 9]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check first vertical line
+  move = happy_line([g[0], g[3], g[6]], [1, 4, 7]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check second vertical line
+  move = happy_line([g[1], g[4], g[7]], [2, 5, 8]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check 3rd vertical line
+  move = happy_line([g[2], g[5], g[8]], [3, 6, 9]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check first diagonal
+  move = happy_line([g[0], g[4], g[8]], [1, 5, 9]);
+  if (move > 0) {
+    return move;
+  }
+
+  // Check second diagonal
+  move = happy_line([g[2], g[4], g[6]], [3, 5, 7]);
+
+  console.log("Happy line on ", move);
+  return move;
 }
 
 function check_stupid_moves(aGame, aBoard) {
@@ -391,7 +465,12 @@ function giveMeNextMove(aGame, aBoard) {
   window.game = aGame;
   window.board = aBoard;
   // console.log(window.game);
-  var res = check_stupid_moves(aGame, aBoard);
+  var res = check_happy_moves(aGame, aBoard);
+  if (res > 0) {
+    console.log("Yey! I found a happy move.");
+    return res;
+  }
+  res = check_stupid_moves(aGame, aBoard);
   if (res > 0) {
     console.log("Noooo, I will prevent this!");
     return res;
